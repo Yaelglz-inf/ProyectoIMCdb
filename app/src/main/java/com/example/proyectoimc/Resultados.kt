@@ -13,7 +13,7 @@ import kotlinx.coroutines.launch
 
 class Resultados : AppCompatActivity() {
 
-    private lateinit var binding: ActivityResultadosBinding
+    lateinit var binding: ActivityResultadosBinding
     private lateinit var viewModel: RegistroIMCViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -22,7 +22,7 @@ class Resultados : AppCompatActivity() {
         binding = ActivityResultadosBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        ViewCompat.setOnApplyWindowInsetsListener(binding.root) { v, insets ->
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
@@ -33,15 +33,13 @@ class Resultados : AppCompatActivity() {
         lifecycleScope.launch {
             viewModel.registros.collect { lista ->
                 if (lista.isEmpty()) {
-                    binding.tvwList.text = "No hay registros guardados."
+                    binding.tvwList.text = "Todavía no hay registros guardados."
                 } else {
-                    val sb = StringBuilder()
-                    lista.forEach { r ->
-                        sb.append("👤 ${r.nombre} | Edad: ${r.edad}\n")
-                        sb.append("   Peso: ${r.peso} kg | Estatura: ${r.estatura} cm\n")
-                        sb.append("   IMC: ${"%.2f".format(r.imc)} — ${r.categoria}\n\n")
+                    binding.tvwList.text = lista.joinToString("\n\n") { registro ->
+                        "${registro.nombre} (${registro.edad} años)\n" +
+                                "Peso: ${registro.peso} kg — Estatura: ${registro.estatura} cm\n" +
+                                "IMC: ${"%.2f".format(registro.imc)} — ${registro.categoria}"
                     }
-                    binding.tvwList.text = sb.toString()
                 }
             }
         }

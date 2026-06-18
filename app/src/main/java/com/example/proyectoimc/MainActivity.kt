@@ -14,7 +14,7 @@ import com.example.proyectoimc.viewmodel.RegistroIMCViewModel
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivityMainBinding
+    lateinit var binding: ActivityMainBinding
     private lateinit var viewModel: RegistroIMCViewModel
 
     private var ultimoImc: Double = 0.0
@@ -25,7 +25,6 @@ class MainActivity : AppCompatActivity() {
         enableEdgeToEdge()
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
@@ -38,13 +37,15 @@ class MainActivity : AppCompatActivity() {
             calcularIMC()
         }
 
-        binding.bttGuardar.setOnClickListener {
-            guardarRegistro()
-        }
 
         binding.bttResultados.setOnClickListener {
             startActivity(Intent(this, Resultados::class.java))
         }
+
+        binding.bttGuardar.setOnClickListener {
+            guardarRegistro()
+        }
+
     }
 
     private fun calcularIMC() {
@@ -61,8 +62,7 @@ class MainActivity : AppCompatActivity() {
         val estatura = estaturaStr.toDouble() / 100
         val imc = peso / (estatura * estatura)
 
-        ultimoImc = imc
-        ultimaCategoria = when {
+        val categoria = when {
             imc < 18.5 -> "Bajo peso"
             imc < 25.0 -> "Peso normal"
             imc < 30.0 -> "Sobrepeso"
@@ -76,8 +76,12 @@ class MainActivity : AppCompatActivity() {
             else       -> "${nombre} tu IMC indica obesidad, en este punto, el exceso de peso puede comenzar a elevar el riesgo de desarrollar condiciones como presión arterial alta, colesterol elevado o resistencia a la insulina."
         }
 
-        binding.tvwIMcResultado.text = "IMC: ${"%.2f".format(imc)} — $ultimaCategoria"
-        binding.tvwResultadoDescrp.text = categoriaDescrip
+        ultimoImc = imc
+        ultimaCategoria = categoria
+
+        binding.tvwIMcResultado.text = "IMC: ${"%.2f".format(imc)} — $categoria"
+
+        binding.tvwResultadoDescrp.text = "$categoriaDescrip"
     }
 
     private fun guardarRegistro() {
@@ -108,4 +112,5 @@ class MainActivity : AppCompatActivity() {
         viewModel.guardar(registro)
         Toast.makeText(this, "Registro guardado", Toast.LENGTH_SHORT).show()
     }
+
 }
