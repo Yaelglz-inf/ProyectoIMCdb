@@ -1,0 +1,42 @@
+<resources>
+    <string name="app_name">ProyectoIMC</string>
+
+    <string name="tvwTitulo">Calculadora del IMC</string>
+
+
+
+
+    <string name="tvwNombre">Nombre: </string>
+    <string name="etNombre">Ingresa tu nombre</string>
+    <string name="tvwEdad">Edad: </string>
+    <string name="etEdad">Ingresa tu edad</string>
+
+    <string name="tvwPeso">Peso: </string>
+    <string name="etPeso">Ingresa tu peso en kg</string>
+
+    <string name="tvwEstatura">Estatura: </string>
+    <string name="etEstatura">Ingresa tu estatura en cm</string>
+
+
+    <string name="bttCalcular">Calcular IMC</string>
+
+
+    <string name="tittle_bajo">Bajo</string>
+    <string name="des_bajo">Tu resultado indica que tu peso es inferior al rango considerado saludable, estar por debajo del peso recomendado puede dejar a tu cuerpo sin las reservas de energía necesarias y debilitar tu sistema inmunológico.</string>
+
+    <string name="tittle_normal">Normal</string>
+    <string name="des_normal">¡Felicidades! Tu peso se encuentra dentro del rango ideal para tu estatura, esto indica un buen equilibrio entre la energía que consumes y la que gastas, el objetivo ahora es mantener este balance y enfocarte en tu salud a largo plazo.</string>
+
+    <string name="title_sobrepeso">Sobrepeso</string>
+    <string name="des_sobrepeso">Tu resultado se encuentra en la categoría de sobrepeso, esto funciona como una señal de advertencia de tu cuerpo. No se trata de hacer dietas extremas, sino de realizar pequeños ajustes en tu rutina diaria que generen un gran impacto en tu energía y salud a futuro.</string>
+
+    <string name="tittle_obesidad">Obesidad</string>
+
+
+
+    <string name="des_obesidad">Tu IMC indica obesidad, en este punto, el exceso de peso puede comenzar a elevar el riesgo de desarrollar condiciones como presión arterial alta, colesterol elevado o resistencia a la insulina.</string>
+
+    <string name="bttGuardar">Guardar</string>
+    <string name="BttResultados">Resultados guardados</string>
+
+</resources>
